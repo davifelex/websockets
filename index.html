@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>WebSocket Cliente</title>
+</head>
+<body>
+  <input type="text" id="mensagem" placeholder="Digite uma mensagem">
+  <button onclick="enviarMensagem()">Enviar</button>
+
+  <script>
+    const socket = new WebSocket('ws://localhost:3000'); // Conecte-se ao servidor WebSocket
+
+    // Evento para receber mensagens do servidor
+    socket.onmessage = (event) => {
+      const mensagemRecebida = event.data;
+      console.log('Resposta do servidor:', mensagemRecebida);
+    };
+
+    // Enviar uma mensagem para o servidor
+    function enviarMensagem() {
+      const mensagem = document.getElementById('mensagem').value;
+      socket.send(mensagem);
+    }
+  </script>
+</body>
+</html>
